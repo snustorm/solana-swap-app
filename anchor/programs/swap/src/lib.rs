@@ -2,69 +2,44 @@
 
 use anchor_lang::prelude::*;
 
+mod instructions;
+mod state;
+
+pub use instructions::*;
+
+
 declare_id!("AsjZ3kWAUSQRNt2pZVeJkywhZ6gpLpHZmJjduPmKZDZZ");
 
 #[program]
 pub mod swap {
+
     use super::*;
 
-  pub fn close(_ctx: Context<CloseSwap>) -> Result<()> {
-    Ok(())
-  }
+    pub fn make_offer(
+        ctx: Context<MakeOffer>, 
+        id: u64,
+        token_a_offer_amount: u64,
+        token_b_wanted_amount: u64
+    ) -> Result<()> {
+        
+        //1. Maker Send Token A to Vault
+        process_send_token_to_vault(&ctx, token_a_offer_amount)?;
+        //1. Maker Create the Offer Account
+        process_save_offer(ctx, id, token_b_wanted_amount)?;
+        Ok(())
+    }
 
-  pub fn decrement(ctx: Context<Update>) -> Result<()> {
-    ctx.accounts.swap.count = ctx.accounts.swap.count.checked_sub(1).unwrap();
-    Ok(())
-  }
+    pub fn take_offer(
+        ctx: Context<TakeOffer>,
+    ) -> Result<()> {
 
-  pub fn increment(ctx: Context<Update>) -> Result<()> {
-    ctx.accounts.swap.count = ctx.accounts.swap.count.checked_add(1).unwrap();
-    Ok(())
-  }
+        //1, Taker Send Token B to Directly to Maker
+        process_send_wanted_token_to_maker(&ctx)?;
 
-  pub fn initialize(_ctx: Context<InitializeSwap>) -> Result<()> {
-    Ok(())
-  }
-
-  pub fn set(ctx: Context<Update>, value: u8) -> Result<()> {
-    ctx.accounts.swap.count = value.clone();
-    Ok(())
-  }
+        //2. Taker Withdraw Token A from Vault and Close Vault
+        process_withdraw_and_close_vault(ctx)?;
+        Ok(())
+    }
+  
 }
 
-#[derive(Accounts)]
-pub struct InitializeSwap<'info> {
-  #[account(mut)]
-  pub payer: Signer<'info>,
-
-  #[account(
-  init,
-  space = 8 + Swap::INIT_SPACE,
-  payer = payer
-  )]
-  pub swap: Account<'info, Swap>,
-  pub system_program: Program<'info, System>,
-}
-#[derive(Accounts)]
-pub struct CloseSwap<'info> {
-  #[account(mut)]
-  pub payer: Signer<'info>,
-
-  #[account(
-  mut,
-  close = payer, // close account and return lamports to payer
-  )]
-  pub swap: Account<'info, Swap>,
-}
-
-#[derive(Accounts)]
-pub struct Update<'info> {
-  #[account(mut)]
-  pub swap: Account<'info, Swap>,
-}
-
-#[account]
-#[derive(InitSpace)]
-pub struct Swap {
-  count: u8,
-}
