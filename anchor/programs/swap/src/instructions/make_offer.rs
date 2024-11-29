@@ -67,13 +67,13 @@ pub fn process_send_token_to_vault(
         &ctx.accounts.payer,
         &ctx.accounts.token_program
     )
-
 }
 
 pub fn process_save_offer(
     ctx: Context<MakeOffer>, 
     id: u64,
-    token_b_wanted_amount: u64
+    token_b_wanted_amount: u64,
+    token_a_offered_amount: u64,
 ) -> Result<()> {
 
     let offer = &mut ctx.accounts.offer;
@@ -82,6 +82,7 @@ pub fn process_save_offer(
     offer.token_mint_a = ctx.accounts.token_mint_a.key();
     offer.token_mint_b = ctx.accounts.token_mint_b.key();
     offer.token_b_wanted_amount = token_b_wanted_amount;
+    offer.token_a_offered_amount = token_a_offered_amount;
     offer.bump = ctx.bumps.offer;
 
     Ok(())

@@ -2,18 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-    height: 100%;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-.wallet-adapter-button-trigger {
-    background: rgb(100, 26, 230) !important;
-    border-radius: 8px !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
-.wallet-adapter-dropdown-list,
-.wallet-adapter-button {
-    font-family: inherit !important;
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }

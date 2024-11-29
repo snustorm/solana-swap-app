@@ -1,0 +1,174 @@
+{
+    "version": "0.1.0",
+    "name": "swap",
+    "instructions": [
+        {
+            "name": "makeOffer",
+            "accounts": [
+                {
+                    "name": "payer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "tokenMintA",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "tokenMintB",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "makerTokenAccountA",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "offer",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vault",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": [
+                {
+                    "name": "id",
+                    "type": "u64"
+                },
+                {
+                    "name": "tokenAOfferAmount",
+                    "type": "u64"
+                },
+                {
+                    "name": "tokenBWantedAmount",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "takeOffer",
+            "accounts": [
+                {
+                    "name": "taker",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "maker",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "tokenMintA",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "tokenMintB",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "takerTokenAccountA",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "takerTokenAccountB",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "makerTokenAccountB",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "offer",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vault",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false
+                }
+            ],
+            "args": []
+        }
+    ],
+    "accounts": [
+        {
+            "name": "Offer",
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "id",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "maker",
+                        "type": "publicKey"
+                    },
+                    {
+                        "name": "tokenMintA",
+                        "type": "publicKey"
+                    },
+                    {
+                        "name": "tokenMintB",
+                        "type": "publicKey"
+                    },
+                    {
+                        "name": "tokenBWantedAmount",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "tokenAOfferedAmount",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "bump",
+                        "type": "u8"
+                    }
+                ]
+            }
+        }
+    ]
+}

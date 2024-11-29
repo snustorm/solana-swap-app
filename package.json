@@ -14,10 +14,15 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@heroicons/react": "^1.0.6",
+    "@project-serum/anchor": "^0.26.0",
     "@solana/spl-token": "^0.4.8",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.95.1",
     "@tabler/icons-react": "^3.11.0",
     "@tanstack/react-query": "^5.51.11",
@@ -27,7 +32,8 @@
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "react-toastify": "^10.0.6"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.0",

@@ -8,7 +8,7 @@ mod state;
 pub use instructions::*;
 
 
-declare_id!("AsjZ3kWAUSQRNt2pZVeJkywhZ6gpLpHZmJjduPmKZDZZ");
+declare_id!("2NBVSh6GCByp2gcPA1CnfjSPhuBK25kY32aEpqv9618u");
 
 #[program]
 pub mod swap {
@@ -25,7 +25,7 @@ pub mod swap {
         //1. Maker Send Token A to Vault
         process_send_token_to_vault(&ctx, token_a_offer_amount)?;
         //1. Maker Create the Offer Account
-        process_save_offer(ctx, id, token_b_wanted_amount)?;
+        process_save_offer(ctx, id, token_b_wanted_amount, token_a_offer_amount)?;
         Ok(())
     }
 
